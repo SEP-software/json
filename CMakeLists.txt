@@ -32,6 +32,7 @@ endif()
 
 enable_language(CXX)
 
+if(NOT SUPPORT_LIBRARIES_BUILD)
  SET(json_DIRNAME_cmake     "cmake")
 
  SET(json_DIRNAME_lib     "lib")
@@ -49,7 +50,6 @@ INCLUDE(CMakePackageConfigHelpers)
   )
 
 
-  
   INSTALL(
   FILES
     ${CMAKE_CURRENT_BINARY_DIR}/jsonConfig.cmake
@@ -64,7 +64,7 @@ INCLUDE(CMakePackageConfigHelpers)
   DESTINATION
     ${json_DIRNAME_cmake}
   )
-  
+endif(NOT SUPPORT_LIBRARIES_BUILD)  
 
 set(SOURCES jsoncpp.cpp
 
@@ -73,8 +73,10 @@ set(INCLUDES json.h
 )
 
 add_library(jsonCpp ${SOURCES} ${INCLUDES})
+if(NOT SUPPORT_LIBRARIES_BUILD)
 install(FILES ${INCLUDES} DESTINATION include)
 install(TARGETS jsonCpp DESTINATION lib EXPORT jsonExports)
+endif(NOT SUPPORT_LIBRARIES_BUILD)
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
