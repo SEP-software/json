@@ -5,7 +5,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE True)
 # configure a header file to pass some of the CMake settings
-find_package( PythonInterp 3 REQUIRED )
 
 
 
