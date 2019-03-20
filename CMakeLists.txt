@@ -33,37 +33,37 @@ endif()
 enable_language(CXX)
 
 if(NOT SUPPORT_LIBRARIES_BUILD)
- SET(json_DIRNAME_cmake     "cmake")
+# SET(json_DIRNAME_cmake     "lib/cmake")
 
- SET(json_DIRNAME_lib     "lib")
- SET(json_DIRNAME_include "include")
-INCLUDE(CMakePackageConfigHelpers)
-  CONFIGURE_PACKAGE_CONFIG_FILE(
-  "${CMAKE_CURRENT_SOURCE_DIR}/jsonConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/jsonConfig.cmake"
-  INSTALL_DESTINATION
-    ${json_DIRNAME_cmake}
-  PATH_VARS
-    json_DIRNAME_include
-    json_DIRNAME_lib
-    json_DIRNAME_cmake
-  )
-
-
-  INSTALL(
-  FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/jsonConfig.cmake
-  DESTINATION
-    cmake
-  )
+# SET(json_DIRNAME_lib     "lib")
+# SET(json_DIRNAME_include "include")
+#INCLUDE(CMakePackageConfigHelpers)
+ # CONFIGURE_PACKAGE_CONFIG_FILE(
+  #"${CMAKE_CURRENT_SOURCE_DIR}/jsonConfig.cmake.in"
+  #"${CMAKE_CURRENT_BINARY_DIR}/jsonConfig.cmake"
+  #INSTALL_DESTINATION
+  #  ${json_DIRNAME_cmake}
+  #PATH_VARS
+  #  json_DIRNAME_include
+  #  json_DIRNAME_lib
+  #  json_DIRNAME_cmake
+  #)
 
 
-  INSTALL(
-  EXPORT
-   jsonExports
-  DESTINATION
-    ${json_DIRNAME_cmake}
-  )
+  #INSTALL(
+  #FILES
+  #  ${CMAKE_CURRENT_BINARY_DIR}/jsonConfig.cmake
+  ##DESTINATION
+  #  lib/cmake
+  #)
+
+
+  #INSTALL(
+ # EXPORT
+  # jsonExports
+  #DESTINATION
+ #   ${json_DIRNAME_cmake}
+ # )
 endif(NOT SUPPORT_LIBRARIES_BUILD)  
 
 set(SOURCES jsoncpp.cpp
@@ -73,10 +73,22 @@ set(INCLUDES json.h
 )
 
 add_library(jsonCpp ${SOURCES} ${INCLUDES})
+
+target_include_directories(
+  buffers
+  PUBLIC $<INSTALL_INTERFACE:include>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+
+         
 if(NOT SUPPORT_LIBRARIES_BUILD)
 install(FILES ${INCLUDES} DESTINATION include)
 install(TARGETS jsonCpp DESTINATION lib EXPORT jsonExports)
 endif(NOT SUPPORT_LIBRARIES_BUILD)
+
+install(EXPORT jsonExports
+        FILE jsonExports.cmake
+        NAMESPACE SEP::IO
+        DESTINATION cmake/sep/io)
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
