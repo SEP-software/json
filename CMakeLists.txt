@@ -1,5 +1,5 @@
 project(json)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.4)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 
@@ -12,6 +12,15 @@ set(json_MAJOR_VERSION 0)
 set(json_MINOR_VERSION 2)
 set(json_VERSION_STRING    ${json_MAJOR_VERSION}.${json_MINOR_VERSION})
 
+
+
+if(POLICY CMP0028)
+   cmake_policy(SET CMP0028 NEW)
+endif()
+
+if(POLICY CMP0042)
+   cmake_policy(SET CMP0042 NEW)
+endif()
 
 
  
