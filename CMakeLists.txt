@@ -75,11 +75,11 @@ set(INCLUDES json.h
 add_library(jsonCpp ${SOURCES} ${INCLUDES})
 
 target_include_directories(
-  buffers
+  jsonCpp
   PUBLIC $<INSTALL_INTERFACE:include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
-         
+
 if(NOT SUPPORT_LIBRARIES_BUILD)
 install(FILES ${INCLUDES} DESTINATION include)
 install(TARGETS jsonCpp DESTINATION lib EXPORT jsonExports)
