@@ -94,10 +94,10 @@ install(FILES ${INCLUDES} DESTINATION include)
 #install(TARGETS jsonCpp DESTINATION lib EXPORT jsonExports)
 endif(NOT SUPPORT_LIBRARIES_BUILD)
 
-install(EXPORT jsonExports
-        FILE jsonExports.cmake
-        NAMESPACE SEP::IO
-        DESTINATION cmake/sep/io)
+##install(EXPORT jsonExports
+#        FILE jsonExports.cmake
+#        NAMESPACE SEP::IO
+#        DESTINATION cmake/sep/io)
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
