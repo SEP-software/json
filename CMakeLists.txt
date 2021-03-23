@@ -89,10 +89,8 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
 
-if(NOT SUPPORT_LIBRARIES_BUILD)
 install(FILES ${INCLUDES} DESTINATION include)
 install(TARGETS jsonCpp DESTINATION lib EXPORT jsonExports)
-endif(NOT SUPPORT_LIBRARIES_BUILD)
 
 ##install(EXPORT jsonExports
 #        FILE jsonExports.cmake
